@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absurd Text Chase</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #link {
+            position: absolute;
+            font-size: 24px;
+            color: #6200ea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #6200ea;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            user-select: none;
+            white-space: nowrap; /* Prevent text wrapping for longer strings */
+        }
+        #link:hover {
+            background-color: #6200ea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <a id="link">Start here</a>
+
+    <script>
+        // Combined list of absurd statements (39 unique strings)
+        const statements = [
+            "Oops, wrong turn",
+            "Peek around the corner",
+            "Not quite, keep going",
+            "Blink and you’ll miss it",
+            "Over here, maybe?",
+            "Catch me if you can",
+            "Nope, try again",
+            "Closer than you think",
+            "Wandering yet?",
+            "Bet you didn’t expect this",
+            "Try this one instead",
+            "You blinked",
+            "Nope, not here",
+            "Almost there",
+            "Warmer…",
+            "Colder…",
+            "This might help (probably not)",
+            "Do not click (click anyway)",
+            "Now we’re talking",
+            "You saw nothing",
+            "Plot twist",
+            "Secret entrance",
+            "You didn’t hear this from me",
+            "Retry your existence",
+            "Proceed with confusion",
+            "Absolutely the right link (maybe)",
+            "Don’t overthink it",
+            "Certified questionable",
+            "This feels illegal",
+            "Unnecessarily mysterious",
+            "You have chosen chaos",
+            "The legend says click here",
+            "The button your ancestors warned you about",
+            "Reserved for time travelers",
+            "Click if hungry",
+            "In case of boredom, press",
+            "Not a trap",
+            "Definitely a trap",
+            "Congratulations, you found nothing"
+        ];
+
+        // Get the link element
+        const link = document.getElementById('link');
+        let currentIndex = -1; // -1 indicates "Start here"
+
+        // Function to get a random statement, avoiding the current one
+        function getRandomStatement(currentIndex) {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * statements.length);
+            } while (newIndex === currentIndex); // Avoid immediate repeat
+            return { text: statements[newIndex], index: newIndex };
+        }
+
+        // Function to get random position within viewport
+        function getRandomPosition() {
+            const maxX = window.innerWidth - link.offsetWidth - 40; // Account for padding/border
+            const maxY = window.innerHeight - link.offsetHeight - 40;
+            const x = Math.floor(Math.random() * maxX);
+            const y = Math.floor(Math.random() * maxY);
+            return { x, y };
+        }
+
+        // Function to update link text and position
+        function updateLink() {
+            // Get new statement
+            const { text, index } = getRandomStatement(currentIndex);
+            currentIndex = index;
+            link.textContent = text;
+
+            // Get new position
+            const { x, y } = getRandomPosition();
+            link.style.left = `${x}px`;
+            link.style.top = `${y}px`;
+        }
+
+        // Initial position for "Start here"
+        const initialPos = getRandomPosition();
+        link.style.left = `${initialPos.x}px`;
+        link.style.top = `${initialPos.y}px`;
+
+        // Click event to update text and position
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default anchor behavior
+            updateLink();
+        });
+    </script>
+</body>
+</html>
