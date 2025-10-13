@@ -1,128 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absurd Text Chase</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        #link {
-            position: absolute;
-            font-size: 24px;
-            color: #6200ea;
-            text-decoration: none;
-            padding: 10px 20px;
-            border: 2px solid #6200ea;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            user-select: none;
-            white-space: nowrap; /* Prevent text wrapping for longer strings */
-        }
-        #link:hover {
-            background-color: #6200ea;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Rabbit Hole</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #dcdcdc;
+      font-family: "Courier New", monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    a:hover {
+      color: #fff;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-    <a id="link">Start here</a>
+  <a id="phrase" href="#">Loading...</a>
 
-    <script>
-        // Combined list of absurd statements (39 unique strings)
-        const statements = [
-            "Oops, wrong turn",
-            "Peek around the corner",
-            "Not quite, keep going",
-            "Blink and you’ll miss it",
-            "Over here, maybe?",
-            "Catch me if you can",
-            "Nope, try again",
-            "Closer than you think",
-            "Wandering yet?",
-            "Bet you didn’t expect this",
-            "Try this one instead",
-            "You blinked",
-            "Nope, not here",
-            "Almost there",
-            "Warmer…",
-            "Colder…",
-            "This might help (probably not)",
-            "Do not click (click anyway)",
-            "Now we’re talking",
-            "You saw nothing",
-            "Plot twist",
-            "Secret entrance",
-            "You didn’t hear this from me",
-            "Retry your existence",
-            "Proceed with confusion",
-            "Absolutely the right link (maybe)",
-            "Don’t overthink it",
-            "Certified questionable",
-            "This feels illegal",
-            "Unnecessarily mysterious",
-            "You have chosen chaos",
-            "The legend says click here",
-            "The button your ancestors warned you about",
-            "Reserved for time travelers",
-            "Click if hungry",
-            "In case of boredom, press",
-            "Not a trap",
-            "Definitely a trap",
-            "Congratulations, you found nothing"
-        ];
+  <script>
+    const phrases = [
+      "Almost found it.",
+      "Nothing loads forever.",
+      "Try again later.",
+      "You missed something.",
+      "Still connecting.",
+      "Wrong page, right feeling.",
+      "Continue collapsing.",
+      "Loop complete.",
+      "Page dreaming.",
+      "End of beginning.",
+      "Link expired.",
+      "Version unknown.",
+      "Wait for meaning.",
+      "System uncertain.",
+      "Access denied gently.",
+      "Continue anyway.",
+      "Almost remembered.",
+      "Something flickered.",
+      "The void replied.",
+      "Context missing.",
+      "Scroll for silence.",
+      "Glitch achieved.",
+      "Try the next illusion.",
+      "Echo detected.",
+      "Offline but hopeful.",
+      "Page not sorry.",
+      "Update postponed.",
+      "The loop apologizes.",
+      "Nothing to undo.",
+      "Syntax of dreams.",
+      "Lost in transit.",
+      "Still buffering truth.",
+      "Out of signal.",
+      "Almost stable.",
+      "Undefined feeling.",
+      "The code hesitated.",
+      "Too late to refresh.",
+      "Awaiting instructions.",
+      "Found in translation.",
+      "This never happened.",
+      "Reboot imagination.",
+      "Input ignored.",
+      "Redirecting endlessly.",
+      "Almost open.",
+      "Temporary permanence.",
+      "Reading error.",
+      "Try elsewhere.",
+      "The cache remembers.",
+      "Expired reality.",
+      "Continue dissolving.",
+      "Download incomplete.",
+      "Blink and repeat.",
+      "Accessing nothingness.",
+      "Glitch continues.",
+      "Searching for context.",
+      "Loading yesterday.",
+      "Your click was noted.",
+      "Undefined location.",
+      "Connection emotional.",
+      "You were never offline."
+    ];
 
-        // Get the link element
-        const link = document.getElementById('link');
-        let currentIndex = -1; // -1 indicates "Start here"
+    const phraseEl = document.getElementById('phrase');
 
-        // Function to get a random statement, avoiding the current one
-        function getRandomStatement(currentIndex) {
-            let newIndex;
-            do {
-                newIndex = Math.floor(Math.random() * statements.length);
-            } while (newIndex === currentIndex); // Avoid immediate repeat
-            return { text: statements[newIndex], index: newIndex };
-        }
+    function randomPhrase() {
+      const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+      phraseEl.textContent = phrase;
+    }
 
-        // Function to get random position within viewport
-        function getRandomPosition() {
-            const maxX = window.innerWidth - link.offsetWidth - 40; // Account for padding/border
-            const maxY = window.innerHeight - link.offsetHeight - 40;
-            const x = Math.floor(Math.random() * maxX);
-            const y = Math.floor(Math.random() * maxY);
-            return { x, y };
-        }
+    phraseEl.addEventListener('click', e => {
+      e.preventDefault();
+      randomPhrase();
+    });
 
-        // Function to update link text and position
-        function updateLink() {
-            // Get new statement
-            const { text, index } = getRandomStatement(currentIndex);
-            currentIndex = index;
-            link.textContent = text;
-
-            // Get new position
-            const { x, y } = getRandomPosition();
-            link.style.left = `${x}px`;
-            link.style.top = `${y}px`;
-        }
-
-        // Initial position for "Start here"
-        const initialPos = getRandomPosition();
-        link.style.left = `${initialPos.x}px`;
-        link.style.top = `${initialPos.y}px`;
-
-        // Click event to update text and position
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent default anchor behavior
-            updateLink();
-        });
-    </script>
+    randomPhrase();
+  </script>
 </body>
 </html>
