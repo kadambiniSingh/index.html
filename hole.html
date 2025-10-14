@@ -47,33 +47,10 @@
       opacity: 0;
       transform: scale(0.9);
     }
-
-    #musicLink {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      color: #0ff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-family: monospace;
-    }
-
-    #musicLink:hover {
-      text-shadow: 0 0 10px #0ff;
-    }
   </style>
 </head>
 <body>
   <a id="phrase" href="#">Click here</a>
-
-  <a id="musicLink" href="https://youtu.be/YzhjTeSz9y4?si=R8OMdTin0ge3VZA4" target="_blank">
-    🎵 Play Music
-  </a>
-
-  <audio id="bgMusic" autoplay loop>
-    <source src="YOUR_AUDIO_FILE.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <script>
     const phrases = [
@@ -97,6 +74,7 @@
     const phraseEl = document.getElementById('phrase');
     const body = document.body;
 
+    // set random position within viewport
     function moveRandom() {
       const maxX = window.innerWidth - phraseEl.offsetWidth - 20;
       const maxY = window.innerHeight - phraseEl.offsetHeight - 20;
@@ -106,6 +84,7 @@
       phraseEl.style.top = `${y}px`;
     }
 
+    // random phrase + trippy background hue
     function randomPhrase() {
       const phrase = phrases[Math.floor(Math.random() * phrases.length)];
       phraseEl.textContent = phrase;
@@ -123,15 +102,11 @@
       }, 300);
     });
 
+    // initial setup
     window.onload = () => {
       randomPhrase();
       moveRandom();
-
-      // optional: auto-play background music (mute if autoplay blocked)
-      const music = document.getElementById('bgMusic');
-      music.volume = 0.15; // soft background
-      music.play().catch(() => {}); 
-    }
+    };
   </script>
 </body>
 </html>
