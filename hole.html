@@ -24,89 +24,18 @@
 
     #phrase {
       position: absolute;
-      color: #aaa;
+      color: #ccc;
       text-decoration: none;
       font-size: 1.4rem;
+      letter-spacing: 0.5px;
       transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
       cursor: pointer;
       user-select: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 2px;
     }
 
     #phrase:hover {
       color: #fff;
-      transform: scale(1.15);
-      text-shadow: 0 0 12px #fff;
-    }
-
-    #phrase:active {
-      color: #0ff;
-      text-shadow: 0 0 25px #0ff;
-    }
-
-    .fade {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-  </style>
-</head>
-<body>
-  <a id="phrase" href="#">Click here</a>
-
-  <script>
-    const phrases = [
-      "Almost found it.","Nothing loads forever.","Try again later.","You missed something.",
-      "Still connecting.","Wrong page, right feeling.","Continue collapsing.","Loop complete.",
-      "Page dreaming.","End of beginning.","Link expired.","Version unknown.","Wait for meaning.",
-      "System uncertain.","Access denied gently.","Continue anyway.","Almost remembered.",
-      "Something flickered.","The void replied.","Context missing.","Scroll for silence.",
-      "Glitch achieved.","Try the next illusion.","Echo detected.","Offline but hopeful.",
-      "Page not sorry.","Update postponed.","The loop apologizes.","Nothing to undo.",
-      "Syntax of dreams.","Lost in transit.","Still buffering truth.","Out of signal.",
-      "Almost stable.","Undefined feeling.","The code hesitated.","Too late to refresh.",
-      "Awaiting instructions.","Found in translation.","This never happened.","Reboot imagination.",
-      "Input ignored.","Redirecting endlessly.","Almost open.","Temporary permanence.",
-      "Reading error.","Try elsewhere.","The cache remembers.","Expired reality.",
-      "Continue dissolving.","Download incomplete.","Blink and repeat.","Accessing nothingness.",
-      "Glitch continues.","Searching for context.","Loading yesterday.","Your click was noted.",
-      "Undefined location.","Connection emotional.","You were never offline."
-    ];
-
-    const phraseEl = document.getElementById('phrase');
-    const body = document.body;
-
-    // set random position within viewport
-    function moveRandom() {
-      const maxX = window.innerWidth - phraseEl.offsetWidth - 20;
-      const maxY = window.innerHeight - phraseEl.offsetHeight - 20;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-      phraseEl.style.left = `${x}px`;
-      phraseEl.style.top = `${y}px`;
-    }
-
-    // random phrase + trippy background hue
-    function randomPhrase() {
-      const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-      phraseEl.textContent = phrase;
-      const hue = Math.floor(Math.random() * 360);
-      body.style.background = `radial-gradient(circle at center, hsl(${hue}, 30%, 10%), #000)`;
-    }
-
-    phraseEl.addEventListener('click', e => {
-      e.preventDefault();
-      phraseEl.classList.add('fade');
-      setTimeout(() => {
-        randomPhrase();
-        moveRandom();
-        phraseEl.classList.remove('fade');
-      }, 300);
-    });
-
-    // initial setup
-    window.onload = () => {
-      randomPhrase();
-      moveRandom();
-    };
-  </script>
-</body>
-</html>
+      transform: scale(1.1);
+      text-shadow: 0 0 12
