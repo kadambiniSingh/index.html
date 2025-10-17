@@ -24,65 +24,33 @@
 
     #phrase {
       position: absolute;
-      color: #ccc;
+      color: #aaa;
       text-decoration: none;
       font-size: 1.4rem;
-      letter-spacing: 0.5px;
       transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
       cursor: pointer;
       user-select: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      padding-bottom: 2px;
     }
 
     #phrase:hover {
       color: #fff;
-      transform: scale(1.1);
+      transform: scale(1.15);
       text-shadow: 0 0 12px #fff;
-      border-bottom: 1px solid #0ff;
     }
 
     #phrase:active {
       color: #0ff;
       text-shadow: 0 0 25px #0ff;
-      transform: scale(1.05);
     }
 
     .fade {
       opacity: 0;
       transform: scale(0.9);
     }
-
-    #musicLink {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      color: #0ff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-family: monospace;
-      opacity: 0.7;
-      transition: opacity 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    #musicLink:hover {
-      opacity: 1;
-      text-shadow: 0 0 10px #0ff;
-    }
   </style>
 </head>
 <body>
   <a id="phrase" href="#">Click here</a>
-
-  <!-- Optional music link -->
-  <a id="musicLink" href="https://www.youtube.com/watch?v=YOUR_YOUTUBE_ID" target="_blank">
-    🎵 Play Music
-  </a>
-
-  <audio id="bgMusic" autoplay loop>
-    <source src="YOUR_AUDIO_FILE.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <script>
     const phrases = [
@@ -100,17 +68,13 @@
       "Reading error.","Try elsewhere.","The cache remembers.","Expired reality.",
       "Continue dissolving.","Download incomplete.","Blink and repeat.","Accessing nothingness.",
       "Glitch continues.","Searching for context.","Loading yesterday.","Your click was noted.",
-      "Undefined location.","Connection emotional.","You were never offline.",
-      "Thou art a marvel of misplaced confidence.","Thy wits do gambol like drunken hares.",
-      "A most distinguished emptiness surrounds thee.","Thy presence improves absence.",
-      "Thy manners are exceedingly adequate.","Thou art a connoisseur of error.",
-      "A gentle calamity in human form.","Thy silence is thy greatest contribution.",
-      "The light of thy genius burneth low, yet smoketh much."
+      "Undefined location.","Connection emotional.","You were never offline."
     ];
 
     const phraseEl = document.getElementById('phrase');
     const body = document.body;
 
+    // set random position within viewport
     function moveRandom() {
       const maxX = window.innerWidth - phraseEl.offsetWidth - 20;
       const maxY = window.innerHeight - phraseEl.offsetHeight - 20;
@@ -120,6 +84,7 @@
       phraseEl.style.top = `${y}px`;
     }
 
+    // random phrase + trippy background hue
     function randomPhrase() {
       const phrase = phrases[Math.floor(Math.random() * phrases.length)];
       phraseEl.textContent = phrase;
@@ -137,12 +102,10 @@
       }, 300);
     });
 
+    // initial setup
     window.onload = () => {
       randomPhrase();
       moveRandom();
-      const music = document.getElementById('bgMusic');
-      music.volume = 0.15;
-      music.play().catch(() => {});
     };
   </script>
 </body>
