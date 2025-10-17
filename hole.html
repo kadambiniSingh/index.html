@@ -38,4 +38,112 @@
     #phrase:hover {
       color: #fff;
       transform: scale(1.1);
-      text-shadow: 0 0 12
+      text-shadow: 0 0 12px #fff;
+      border-bottom: 1px solid #0ff;
+    }
+
+    #phrase:active {
+      color: #0ff;
+      text-shadow: 0 0 25px #0ff;
+      transform: scale(1.05);
+    }
+
+    .fade {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    #musicLink {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      color: #0ff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-family: monospace;
+      opacity: 0.7;
+      transition: opacity 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    #musicLink:hover {
+      opacity: 1;
+      text-shadow: 0 0 10px #0ff;
+    }
+  </style>
+</head>
+<body>
+  <a id="phrase" href="#">Click here</a>
+
+  <!-- Optional music link -->
+  <a id="musicLink" href="https://www.youtube.com/watch?v=YOUR_YOUTUBE_ID" target="_blank">
+    🎵 Play Music
+  </a>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="YOUR_AUDIO_FILE.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const phrases = [
+      "Almost found it.","Nothing loads forever.","Try again later.","You missed something.",
+      "Still connecting.","Wrong page, right feeling.","Continue collapsing.","Loop complete.",
+      "Page dreaming.","End of beginning.","Link expired.","Version unknown.","Wait for meaning.",
+      "System uncertain.","Access denied gently.","Continue anyway.","Almost remembered.",
+      "Something flickered.","The void replied.","Context missing.","Scroll for silence.",
+      "Glitch achieved.","Try the next illusion.","Echo detected.","Offline but hopeful.",
+      "Page not sorry.","Update postponed.","The loop apologizes.","Nothing to undo.",
+      "Syntax of dreams.","Lost in transit.","Still buffering truth.","Out of signal.",
+      "Almost stable.","Undefined feeling.","The code hesitated.","Too late to refresh.",
+      "Awaiting instructions.","Found in translation.","This never happened.","Reboot imagination.",
+      "Input ignored.","Redirecting endlessly.","Almost open.","Temporary permanence.",
+      "Reading error.","Try elsewhere.","The cache remembers.","Expired reality.",
+      "Continue dissolving.","Download incomplete.","Blink and repeat.","Accessing nothingness.",
+      "Glitch continues.","Searching for context.","Loading yesterday.","Your click was noted.",
+      "Undefined location.","Connection emotional.","You were never offline.",
+      "Thou art a marvel of misplaced confidence.","Thy wits do gambol like drunken hares.",
+      "A most distinguished emptiness surrounds thee.","Thy presence improves absence.",
+      "Thy manners are exceedingly adequate.","Thou art a connoisseur of error.",
+      "A gentle calamity in human form.","Thy silence is thy greatest contribution.",
+      "The light of thy genius burneth low, yet smoketh much."
+    ];
+
+    const phraseEl = document.getElementById('phrase');
+    const body = document.body;
+
+    function moveRandom() {
+      const maxX = window.innerWidth - phraseEl.offsetWidth - 20;
+      const maxY = window.innerHeight - phraseEl.offsetHeight - 20;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      phraseEl.style.left = `${x}px`;
+      phraseEl.style.top = `${y}px`;
+    }
+
+    function randomPhrase() {
+      const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+      phraseEl.textContent = phrase;
+      const hue = Math.floor(Math.random() * 360);
+      body.style.background = `radial-gradient(circle at center, hsl(${hue}, 30%, 10%), #000)`;
+    }
+
+    phraseEl.addEventListener('click', e => {
+      e.preventDefault();
+      phraseEl.classList.add('fade');
+      setTimeout(() => {
+        randomPhrase();
+        moveRandom();
+        phraseEl.classList.remove('fade');
+      }, 300);
+    });
+
+    window.onload = () => {
+      randomPhrase();
+      moveRandom();
+      const music = document.getElementById('bgMusic');
+      music.volume = 0.15;
+      music.play().catch(() => {});
+    };
+  </script>
+</body>
+</html>
