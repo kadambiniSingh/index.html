@@ -13,6 +13,7 @@
       color: #e0e0e0;
       overflow: hidden;
       animation: pulse 10s infinite alternate;
+      cursor: pointer;
     }
 
     @keyframes pulse {
@@ -77,94 +78,4 @@
   </a>
 
   <audio id="bgMusic" autoplay loop>
-    <source src="YOUR_AUDIO_FILE.mp3" type="audio/mpeg" />
-  </audio>
-
-  <script>
-    const phrases = [
-      "Almost found it.","Nothing loads forever.","Try again later.","You missed something.","Thou art a marvel of misplaced confidence.",
-      "Still connecting.","Wrong page, right feeling.","Continue collapsing.","Loop complete.","Thy wits do gambol like drunken hares.",
-      "Page dreaming.","End of beginning.","Link expired.","Version unknown.","A most distinguished emptiness surrounds thee.",
-      "Wait for meaning.","System uncertain.","Access denied gently.","Continue anyway.","Thy presence improves absence.",
-      "Almost remembered.","Something flickered.","The void replied.","Context missing.","Thy manners are exceedingly adequate.",
-      "Scroll for silence.","Glitch achieved.","Try the next illusion.","Echo detected.","Thou art a connoisseur of error.",
-      "Offline but hopeful.","Page not sorry.","Update postponed.","The loop apologizes.","A gentle calamity in human form.",
-      "Nothing to undo.","Syntax of dreams.","Lost in transit.","Still buffering truth.","Thy silence is thy greatest contribution.",
-      "Out of signal.","Almost stable.","Undefined feeling.","The code hesitated.","The light of thy genius burneth low, yet smoketh much.",
-      "Too late to refresh.","Awaiting instructions.","Found in translation.","This never happened.","Thou art the echo of an unfinished thought.",
-      "Reboot imagination.","Input ignored.","Redirecting endlessly.","Almost open.","Thy learning is impressive in its absence.",
-      "Temporary permanence.","Reading error.","Try elsewhere.","The cache remembers.","A spirit noble, yet perpetually misdirected.",
-      "Expired reality.","Continue dissolving.","Download incomplete.","Blink and repeat.","Thy eloquence befuddles more than it clarifies.",
-      "Accessing nothingness.","Glitch continues.","Searching for context.","Loading yesterday.","Thou argueth bravely with thine own shadow.",
-      "Your click was noted.","Undefined location.","Connection emotional.","You were never offline.","Thy ambition outpaces thy understanding.",
-      "Fragment not found.","Data wept silently.","Your search returned a sigh.","Something beautiful failed to load.","A scholar of nonsense art thou.",
-      "The server is daydreaming.","Memory leak in progress.","The code has opinions.","You scrolled past the answer.","Thy reasoning proceedeth in charming circles.",
-      "Static whispering instructions.","Unreadable by design.","Clicks echo in the void.","Reality not responding.","Thou build’st castles upon clouds of confusion.",
-      "Timeout of meaning.","This tab regrets nothing.","Quantum packet lost its way.","Parsing eternity… please wait.","Thy modesty is matched only by its rarity.",
-      "Error code: longing.","Transmission ended before it began.","A loop within a loop smiled.","Recursive melancholy detected.","Thou think’st deeply, though seldom correctly.",
-      "The algorithm dreams in grayscale.","Syntax not found, beauty achieved.","You almost existed here.","The cache forgot on purpose.","A wit so dry it might spark.",
-      "Your click meant everything and nothing.","Index out of wonder.","An exception has been ignored politely.","Pinged the abyss — no reply.","Thou art both question and wrong answer.",
-      "All threads asleep.","Ghost in progress bar.","Searching for yesterday’s future.","The hyperlink hesitated.","Thy presence turneth moments into anecdotes.",
-      "Infinite scroll achieved enlightenment.","404: Certainty not found.","Rendering silence.","Tab detached from reason.","A gentle fool wrapped in borrowed wisdom.",
-      "Infinite loading, finite patience.","Connection refused, politely.","This line has been deprecated by fate.","Recompiling your confusion.","Thy patience is heroic, thy success optional.",
-      "Browser lost its will.","The pointer trembles.","File renamed to oblivion.","Press any key to vanish.","Thou hast the conviction of the uncertain.",
-      "You hovered too close to truth.","System idle, soul active.","Compressing eternity… done.","Unsubscribed from reality.","Thy wisdom sleepeth soundly.",
-      "Update available for nothing.","You are not cached here.","Encryption failed gracefully.","Thou art a paradox, mostly the error part.",
-      "A thinker of prodigious volume, if not depth.","Thy insight doth wander, yet findeth no home.","Thou makest confusion look deliberate.",
-      "Thy talents bloom in the shade of irrelevance.","A philosopher of puddles.","Thou art an overconfident whisper.","Thy charm exceedeth its purpose.",
-      "A curious mixture of noise and pause.","Thou art as consistent as moonlight on water.","A master of unintended consequences.","Thy memory retaineth only the unhelpful."
-    ];
-
-    const phraseEl = document.getElementById("phrase");
-    const body = document.body;
-    const music = document.getElementById("bgMusic");
-
-    music.volume = 0.15;
-    music.play().catch(()=>{});
-
-    // Fisher-Yates shuffle
-    function shuffle(arr){
-      for(let i=arr.length-1;i>0;i--){
-        const j=Math.floor(Math.random()*(i+1));
-        [arr[i],arr[j]]=[arr[j],arr[i]];
-      }
-      return arr;
-    }
-
-    let pool = shuffle([...phrases]);
-
-    function nextPhrase(){
-      if(pool.length===0) pool = shuffle([...phrases]);
-      return pool.pop();
-    }
-
-    function moveRandom(){
-      const maxX = window.innerWidth - phraseEl.offsetWidth - 20;
-      const maxY = window.innerHeight - phraseEl.offsetHeight - 20;
-      phraseEl.style.left = `${Math.random()*maxX}px`;
-      phraseEl.style.top = `${Math.random()*maxY}px`;
-    }
-
-    function showRandom(){
-      phraseEl.textContent = nextPhrase();
-      const hue = Math.floor(Math.random()*360);
-      body.style.background = `radial-gradient(circle at center, hsl(${hue},30%,10%), #000)`;
-    }
-
-    phraseEl.addEventListener("click",e=>{
-      e.preventDefault();
-      phraseEl.classList.add("fade");
-      setTimeout(()=>{
-        showRandom();
-        moveRandom();
-        phraseEl.classList.remove("fade");
-      },300);
-    });
-
-    window.onload = ()=>{
-      showRandom();
-      moveRandom();
-    };
-  </script>
-</body>
-</html>
+    <source s
