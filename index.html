@@ -1,83 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome to the Rabbit Hole</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dive Into the Unknown</title>
   <style>
     html, body {
       height: 100%;
       margin: 0;
       background: radial-gradient(circle at center, #0a0a0a, #000);
-      color: #e0e0e0;
       font-family: "Courier New", monospace;
+      color: #e0e0e0;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       overflow: hidden;
+      cursor: pointer;
       animation: pulse 10s infinite alternate;
     }
 
     @keyframes pulse {
-      0% { background: radial-gradient(circle at center, #0a0a0a, #000); }
-      50% { background: radial-gradient(circle at center, #111, #000); }
-      100% { background: radial-gradient(circle at center, #0a0a0a, #000); }
+      0%,100% {background: radial-gradient(circle at center,#0a0a0a,#000);}
+      50% {background: radial-gradient(circle at center,#111,#000);}
     }
 
-    h1 {
-      font-size: 2rem;
-      letter-spacing: 1px;
-      color: #fff;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 12px #fff;
-      animation: fadeIn 2s ease forwards;
-    }
-
-    p {
+    #intro {
       max-width: 600px;
-      color: #aaa;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin: 0 1rem 2rem;
-      animation: fadeIn 3s ease forwards;
     }
 
-    a {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      border: 1px solid #555;
-      border-radius: 8px;
-      color: #ccc;
-      text-decoration: none;
-      transition: all 0.4s ease;
-      font-size: 1rem;
-      animation: fadeIn 4s ease forwards;
+    #intro h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
-    a:hover {
+    #intro p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    #enterButton {
+      font-size: 1.5rem;
       color: #0ff;
-      border-color: #0ff;
-      text-shadow: 0 0 12px #0ff;
-      transform: scale(1.05);
+      text-decoration: none;
+      border-bottom: 2px solid rgba(0,255,255,0.5);
+      padding-bottom: 3px;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.3s, border-bottom 0.3s, text-shadow 0.3s;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    #enterButton:hover {
+      color: #fff;
+      transform: scale(1.1);
+      border-bottom-color: #0ff;
+      text-shadow: 0 0 15px #0ff;
+    }
+
+    #musicLink {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 0.9rem;
+      font-family: monospace;
+      color: #0ff;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.3s, text-shadow 0.3s;
+      z-index: 1000;
+    }
+
+    #musicLink:hover {
+      opacity: 1;
+      text-shadow: 0 0 10px #0ff;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to the Rabbit Hole</h1>
-  <p>
-    Every link leads to another link.  
-    Every click feels like progress, but nothing ever loads.  
-    This place was built from curiosity — and it never ends.  
-    <br><br>
-    Follow the echoes. Lose your way gracefully.
-  </p>
-  <a href="hole.html">Enter the Hole</a>
+  <div id="intro">
+    <h1>Dive into the World of the Unknown</h1>
+    <p>
+      Step beyond the edge of certainty and immerse yourself in a landscape where meaning is elusive, and every click opens a new path.  
+      Explore, wander, and surrender to the curiosity that beckons you onward.  
+      The unknown awaits — are you ready to see where it leads?
+    </p>
+    <a id="enterButton" href="hole.html">Click here to begin</a>
+  </div>
+
+  <!-- Music link -->
+  <a id="musicLink" href="https://www.youtube.com/watch?v=YOUR_YOUTUBE_ID" target="_blank">
+    🎵 Play Ambient Music
+  </a>
+
+  <!-- Optional local audio file -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="YOUR_AUDIO_FILE.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.15;
+    music.play().catch(()=>{});
+  </script>
 </body>
 </html>
