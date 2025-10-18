@@ -16,7 +16,6 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
-      cursor: pointer;
       animation: pulse 10s infinite alternate;
     }
 
@@ -42,19 +41,26 @@
 
     #enterButton {
       font-size: 1.5rem;
-      color: #0ff;
+      color: #ccc;
       text-decoration: none;
-      border-bottom: 2px solid rgba(0,255,255,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
       padding-bottom: 3px;
       cursor: pointer;
       transition: color 0.3s, transform 0.3s, border-bottom 0.3s, text-shadow 0.3s;
+      user-select: none;
     }
 
     #enterButton:hover {
-      color: #fff;
+      color: #0ff;
       transform: scale(1.1);
       border-bottom-color: #0ff;
-      text-shadow: 0 0 15px #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    #enterButton:active {
+      color: #0ff;
+      text-shadow: 0 0 20px #0ff;
+      transform: scale(1.05);
     }
 
     #musicLink {
@@ -84,23 +90,4 @@
       Explore, wander, and surrender to the curiosity that beckons you onward.  
       The unknown awaits — are you ready to see where it leads?
     </p>
-    <a id="enterButton" href="hole.html">Click here to begin</a>
-  </div>
-
-  <!-- Music link -->
-  <a id="musicLink" href="https://www.youtube.com/watch?v=YOUR_YOUTUBE_ID" target="_blank">
-    🎵 Play Ambient Music
-  </a>
-
-  <!-- Optional local audio file -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="YOUR_AUDIO_FILE.mp3" type="audio/mpeg" />
-  </audio>
-
-  <script>
-    const music = document.getElementById("bgMusic");
-    music.volume = 0.15;
-    music.play().catch(()=>{});
-  </script>
-</body>
-</html>
+    <a id="enter
