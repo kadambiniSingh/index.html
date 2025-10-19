@@ -50,3 +50,91 @@
       color: #0ff;
       transform: scale(1.05);
       text-shadow: 0 0 8px #0ff;
+    }
+
+    #musicLink {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 0.9rem;
+      color: #0ff;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.3s, text-shadow 0.3s;
+    }
+
+    #musicLink:hover {
+      opacity: 1;
+      text-shadow: 0 0 10px #0ff;
+    }
+  </style>
+</head>
+<body>
+  <a id="homeButton" href="index.html">← Home</a>
+  <a id="musicLink" href="https://www.youtube.com/watch?v=YOUR_YOUTUBE_ID" target="_blank">🎵 Ambient Music</a>
+
+  <script>
+    const phrases = [
+      "Almost found it.","Nothing loads forever.","Try again later.","You missed something.","Thou art a marvel of misplaced confidence.",
+      "Still connecting.","Wrong page, right feeling.","Continue collapsing.","Loop complete.","Thy wits do gambol like drunken hares.",
+      "Page dreaming.","End of beginning.","Link expired.","Version unknown.","A most distinguished emptiness surrounds thee.",
+      "Wait for meaning.","System uncertain.","Access denied gently.","Continue anyway.","Thy presence improves absence.",
+      "Almost remembered.","Something flickered.","The void replied.","Context missing.","Thy manners are exceedingly adequate.",
+      "Scroll for silence.","Glitch achieved.","Try the next illusion.","Echo detected.","Thou art a connoisseur of error.",
+      "Offline but hopeful.","Page not sorry.","Update postponed.","The loop apologizes.","A gentle calamity in human form.",
+      "Nothing to undo.","Syntax of dreams.","Lost in transit.","Still buffering truth.","Thy silence is thy greatest contribution.",
+      "Out of signal.","Almost stable.","Undefined feeling.","The code hesitated.","The light of thy genius burneth low, yet smoketh much.",
+      "Too late to refresh.","Awaiting instructions.","Found in translation.","This never happened.","Thou art the echo of an unfinished thought.",
+      "Reboot imagination.","Input ignored.","Redirecting endlessly.","Almost open.","Thy learning is impressive in its absence.",
+      "Temporary permanence.","Reading error.","Try elsewhere.","The cache remembers.","A spirit noble, yet perpetually misdirected.",
+      "Expired reality.","Continue dissolving.","Download incomplete.","Blink and repeat.","Thy eloquence befuddles more than it clarifies.",
+      "Accessing nothingness.","Glitch continues.","Searching for context.","Loading yesterday.","Thou argueth bravely with thine own shadow.",
+      "Your click was noted.","Undefined location.","Connection emotional.","You were never offline.","Thy ambition outpaces thy understanding."
+    ];
+
+    let usedPhrases = new Set();
+
+    function randomPhrase() {
+      if (usedPhrases.size === phrases.length) usedPhrases.clear();
+      let phrase;
+      do {
+        phrase = phrases[Math.floor(Math.random() * phrases.length)];
+      } while (usedPhrases.has(phrase));
+      usedPhrases.add(phrase);
+      return phrase;
+    }
+
+    function createPhrase(x, y) {
+      const phrase = document.createElement("div");
+      phrase.className = "phrase";
+      phrase.textContent = randomPhrase();
+      document.body.appendChild(phrase);
+
+      if (!x && !y) {
+        // first phrase in center
+        phrase.style.left = "50%";
+        phrase.style.top = "50%";
+        phrase.style.transform = "translate(-50%, -50%)";
+      } else {
+        const maxX = window.innerWidth - 200;
+        const maxY = window.innerHeight - 50;
+        phrase.style.left = `${Math.random() * maxX}px`;
+        phrase.style.top = `${Math.random() * maxY}px`;
+      }
+
+      phrase.addEventListener("click", () => {
+        phrase.remove();
+        createPhrase(Math.random(), Math.random());
+      });
+    }
+
+    // Start first phrase in center
+    createPhrase();
+
+    const music = new Audio("YOUR_AUDIO_FILE.mp3");
+    music.volume = 0.15;
+    music.loop = true;
+    music.play().catch(()=>{});
+  </script>
+</body>
+</html>
