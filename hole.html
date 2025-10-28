@@ -13,7 +13,12 @@
       overflow: hidden;
       font-family: "Courier New", monospace;
       color: #fff;
-      cursor: none;
+      cursor: none; /* hides cursor globally */
+    }
+
+    /* Show pointer cursor for clickable items */
+    .phrase, #homeButton, #musicLink {
+      cursor: pointer;
     }
 
     #homeButton {
@@ -24,7 +29,6 @@
       text-decoration: none;
       font-size: 1rem;
       border-bottom: 1px solid rgba(0,255,255,0.4);
-      cursor: pointer;
       transition: color 0.3s, text-shadow 0.3s;
       z-index: 1000;
     }
@@ -41,7 +45,6 @@
       text-decoration: underline;
       border-bottom: 1px solid rgba(255,255,255,0.25);
       padding-bottom: 2px;
-      cursor: pointer;
       user-select: none;
       transition: transform 0.3s, color 0.3s;
     }
@@ -61,6 +64,7 @@
       text-decoration: none;
       opacity: 0.7;
       transition: opacity 0.3s, text-shadow 0.3s;
+      z-index: 1000;
     }
 
     #musicLink:hover {
@@ -104,14 +108,13 @@
       return phrase;
     }
 
-    function createPhrase(x, y) {
+    function createPhrase(isFirst = false) {
       const phrase = document.createElement("div");
       phrase.className = "phrase";
-      phrase.textContent = randomPhrase();
+      phrase.textContent = isFirst ? "Almost found it." : randomPhrase();
       document.body.appendChild(phrase);
 
-      if (!x && !y) {
-        // first phrase in center
+      if (isFirst) {
         phrase.style.left = "50%";
         phrase.style.top = "50%";
         phrase.style.transform = "translate(-50%, -50%)";
@@ -124,17 +127,18 @@
 
       phrase.addEventListener("click", () => {
         phrase.remove();
-        createPhrase(Math.random(), Math.random());
+        createPhrase();
       });
     }
 
-    // Start first phrase in center
-    createPhrase();
+    // Start with central phrase
+    createPhrase(true);
 
+    // Optional ambient background
     const music = new Audio("YOUR_AUDIO_FILE.mp3");
     music.volume = 0.15;
     music.loop = true;
-    music.play().catch(()=>{});
+    music.play().catch(() => {});
   </script>
 </body>
 </html>
