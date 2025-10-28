@@ -13,12 +13,7 @@
       overflow: hidden;
       font-family: "Courier New", monospace;
       color: #fff;
-      cursor: none; /* hides cursor globally */
-    }
-
-    /* Show pointer cursor for clickable items */
-    .phrase, #homeButton, #musicLink {
-      cursor: pointer;
+      cursor: default; /* ✅ cursor visible everywhere */
     }
 
     #homeButton {
@@ -31,6 +26,7 @@
       border-bottom: 1px solid rgba(0,255,255,0.4);
       transition: color 0.3s, text-shadow 0.3s;
       z-index: 1000;
+      cursor: pointer;
     }
 
     #homeButton:hover {
@@ -47,6 +43,7 @@
       padding-bottom: 2px;
       user-select: none;
       transition: transform 0.3s, color 0.3s;
+      cursor: pointer;
     }
 
     .phrase:hover {
@@ -65,6 +62,7 @@
       opacity: 0.7;
       transition: opacity 0.3s, text-shadow 0.3s;
       z-index: 1000;
+      cursor: pointer;
     }
 
     #musicLink:hover {
