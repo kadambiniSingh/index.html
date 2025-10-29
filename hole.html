@@ -13,23 +13,8 @@
       overflow: hidden;
       font-family: "Courier New", monospace;
       color: #fff;
-      cursor: none; /* hide default cursor */
-    }
-
-    /* Custom glowing cursor */
-    #cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: rgba(0, 255, 255, 0.8);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s linear;
-      z-index: 2000;
+      cursor: default;
+      touch-action: manipulation;
     }
 
     #homeButton {
@@ -60,9 +45,10 @@
       user-select: none;
       transition: transform 0.3s, color 0.3s;
       cursor: pointer;
-      text-align: center; /* ✅ Center align */
-      white-space: nowrap; /* keep short phrases tidy */
-      transform: translate(-50%, -50%); /* center from coordinates */
+      text-align: center;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      max-width: 90vw;
     }
 
     .phrase:hover {
@@ -88,21 +74,40 @@
       opacity: 1;
       text-shadow: 0 0 10px #0ff;
     }
+
+    /* Hidden YouTube frame for ambient sound */
+    #ytPlayer {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      .phrase {
+        font-size: 1rem;
+        max-width: 85vw;
+      }
+      #homeButton, #musicLink {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div id="cursor"></div>
   <a id="homeButton" href="index.html">← Home</a>
-  <a id="musicLink" href="https://youtu.be/M73x3O7dhmg?si=PfYVMUH5umTg94Bk" target="_blank">🎵 Ambient Music</a>
+  <a id="musicLink" href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank">🎵 Ambient Music</a>
+
+  <!-- Hidden YouTube iframe: replace the ID below with your own track -->
+  <iframe
+    id="ytPlayer"
+    src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&loop=1&playlist=jfKfPfyJRdk"
+    frameborder="0"
+    allow="autoplay"
+  ></iframe>
 
   <script>
-    // === Custom cursor logic ===
-    const cursor = document.getElementById("cursor");
-    document.addEventListener("mousemove", (e) => {
-      cursor.style.left = e.clientX + "px";
-      cursor.style.top = e.clientY + "px";
-    });
-
     const phrases = [
       "Almost found it.","Nothing loads forever.","Try again later.","You missed something.","Thou art a marvel of misplaced confidence.",
       "Still connecting.","Wrong page, right feeling.","Continue collapsing.","Loop complete.","Thy wits do gambol like drunken hares.",
@@ -139,12 +144,13 @@
       phrase.textContent = isFirst ? "Almost found it." : randomPhrase();
       document.body.appendChild(phrase);
 
+      const padding = 60;
       let x, y;
+
       if (isFirst) {
         x = window.innerWidth / 2;
         y = window.innerHeight / 2;
       } else {
-        const padding = 50;
         x = Math.random() * (window.innerWidth - 2 * padding) + padding;
         y = Math.random() * (window.innerHeight - 2 * padding) + padding;
       }
@@ -160,12 +166,6 @@
 
     // Start with central phrase
     createPhrase(true);
-
-    // Optional ambient background
-    const music = new Audio("YOUR_AUDIO_FILE.mp3");
-    music.volume = 0.15;
-    music.loop = true;
-    music.play().catch(() => {});
   </script>
 </body>
 </html>
